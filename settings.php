@@ -55,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['changePassword'])) {
         $row = $validatePasswordResult->fetch_assoc();
         $hashedPassword = $row['password'];
 
-        if (md5($currentPassword) === $hashedPassword) {
-            $hashedNewPassword = md5($newPassword);
+        if (sha1(md5($currentPassword)) === $hashedPassword) {
+            $hashedNewPassword = sha1(md5($newPassword));
             $updatePasswordQuery = "UPDATE users SET password = '$hashedNewPassword' WHERE id = $userId";
             $updatePasswordResult = $conn->query($updatePasswordQuery);
 
