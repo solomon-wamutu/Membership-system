@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($email) || empty($password)) {
       $error_message = "Email and password are required!";
     } else {
-      $hashed_password = md5($password);
+      $hashed_password = sha1(md5($password));
 
       $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$hashed_password'";
       $result = $conn->query($sql);
